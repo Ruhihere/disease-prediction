@@ -8,10 +8,28 @@ st.set_page_config(page_title="Prediction Of Disease Outbreak",
                     layout="wide",
                     page_icon='doctor')
 
-# Load models
-diabetes_model = pickle.load(open(r"C:\Users\ruhip\OneDrive\Desktop\disease_outbreak\training_models\diabetes_model.sav", 'rb'))
-heart_disease_model = pickle.load(open(r"C:\Users\ruhip\OneDrive\Desktop\disease_outbreak\training_models\heart_disease_model.sav", 'rb'))
-parkinson_model = pickle.load(open(r"C:\Users\ruhip\OneDrive\Desktop\disease_outbreak\training_models\parkinsons_model.sav", 'rb'))
+
+# Correct way to load models using relative paths
+current_dir = os.path.dirname(os.path.abspath(__file__))
+models_dir = os.path.join(current_dir, "models")  # Assuming your models are in a "models" subdirectory
+
+diabetes_model_path = os.path.join(models_dir, "diabetes_model.sav")
+with open(diabetes_model_path, 'rb') as f:
+    diabetes_model = pickle.load(f)
+
+heart_disease_model_path = os.path.join(models_dir, "heart_disease_model.sav")
+with open(heart_disease_model_path, 'rb') as f:
+    heart_disease_model = pickle.load(f)
+
+parkinson_model_path = os.path.join(models_dir, "parkinsons_model.sav")
+with open(parkinson_model_path, 'rb') as f:
+    parkinson_model = pickle.load(f)
+
+
+# # Load models
+# diabetes_model = pickle.load(open(r"C:\Users\ruhip\OneDrive\Desktop\disease_outbreak\training_models\diabetes_model.sav", 'rb'))
+# heart_disease_model = pickle.load(open(r"C:\Users\ruhip\OneDrive\Desktop\disease_outbreak\training_models\heart_disease_model.sav", 'rb'))
+# parkinson_model = pickle.load(open(r"C:\Users\ruhip\OneDrive\Desktop\disease_outbreak\training_models\parkinsons_model.sav", 'rb'))
 
 with st.sidebar:
     selected = option_menu('Prediction of Disease Outbreak System',
